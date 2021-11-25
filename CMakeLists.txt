@@ -39,6 +39,8 @@ include_directories(${OpenCV_INCLUDE_DIRS})
 
 find_package(ignition-math6 REQUIRED)
 
+#find_package(ZXing REQUIRED)
+#include_directories(/usr/local/include/ZXing)
 
 ## System dependencies
 find_package(GAZEBO REQUIRED)
@@ -69,6 +71,7 @@ catkin_package(
 	infrared_range
 	robobo_imu_sensor
 	light_sensor
+	#qr_sensor
 	battery_discharge
         battery_consumer
 	led_color
@@ -127,6 +130,13 @@ add_dependencies(light_sensor ${catkin_EXPORTED_TARGETS})
 ## Specify libraries to link a library or executable target against
 target_link_libraries( light_sensor ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES} CameraPlugin )
 
+# QR sensor plugin
+#add_library(qr_sensor SHARED plugins/qr_sensor.cpp)
+#add_dependencies(qr_sensor ${catkin_EXPORTED_TARGETS})
+
+## Specify libraries to link a library or executable target against
+#target_link_libraries( qr_sensor ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES} CameraPlugin ZXing::ZXing)
+
 #EMOTION
 add_library(emotion SHARED plugins/emotion.cpp)
 add_dependencies(emotion ${catkin_EXPORTED_TARGETS})
@@ -156,6 +166,9 @@ target_link_libraries(battery_consumer ${GAZEBO_LIBRARIES} ${Boost_LIBRARIES} ${
 catkin_install_python(
 	PROGRAMS
 	nodes/robobo_irs
+	nodes/robobo_arucos
+	nodes/robobo_tensorflow
+	nodes/robobo_qr
 
 	DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )

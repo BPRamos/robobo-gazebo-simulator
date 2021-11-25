@@ -1,0 +1,21 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*- 
+
+import argparse
+from robobo.robobo_tensorflow import ROBOBO_TENSORFLOW
+
+def start_robobo_tf():
+    """Create a Robobo Object Detection object and run it"""
+    parser = argparse.ArgumentParser(description="This script starts the Robobo Object recognition system")
+    parser.add_argument("-n", "--robobo_name", help="The name of the robot")
+    parser.add_argument("-f", "--file_path", help="The path to the TFLite model")
+    args, _ = parser.parse_known_args()
+    kwargs = vars(args)
+    robobo_name = kwargs.pop("robobo_name", None)
+    file_path = kwargs.pop("file_path", None)
+    object_system = ROBOBO_TENSORFLOW(robobo_name, file_path)
+
+    object_system.run()
+
+if __name__ == "__main__":
+    start_robobo_tf()

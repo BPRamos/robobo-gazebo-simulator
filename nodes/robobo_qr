@@ -1,0 +1,17 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*- 
+
+import argparse
+from robobo.robobo_qr import ROBOBO_QR
+
+def start_robobo_qr():
+    """Create a Robobo QR object and run it"""
+    parser = argparse.ArgumentParser(description="This script starts the Robobo QR recognition system")
+    parser.add_argument("-n", "--robobo_name", help="The name of the robot")
+    args, _ = parser.parse_known_args()
+    kwargs = vars(args)
+    robobo_name = kwargs.pop("robobo_name", None)
+    qr_system = ROBOBO_QR(robobo_name)
+    qr_system.run()
+if __name__ == "__main__":
+    start_robobo_qr()

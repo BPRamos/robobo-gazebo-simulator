@@ -1,0 +1,14 @@
+material qr_material/qr
+{
+	receive_shadows off
+		technique
+		{
+			pass
+			{
+				texture_unit
+				{
+					texture ../textures/testQR.png
+				}
+			}
+		}
+}
